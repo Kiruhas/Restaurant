@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddNewClient.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddNewClient.Designer.cs">
+      <DependentUpon>AddNewClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="DessertDishSlide.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -127,6 +133,9 @@
     <Compile Include="SnackDishSlide.Designer.cs">
       <DependentUpon>SnackDishSlide.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddNewClient.resx">
+      <DependentUpon>AddNewClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DessertDishSlide.resx">
       <DependentUpon>DessertDishSlide.cs</DependentUpon>
     </EmbeddedResource>

@@ -9,7 +9,9 @@ namespace KursachTest
     {
 
         List<Product> productList = new List<Product>();
-        
+        List<Sklad> skladList = new List<Sklad>();
+        List<Production> productionList = new List<Production>();
+        List<DishWithComponent> dishList = new List<DishWithComponent>();
 
         public Form3()
         {
@@ -19,6 +21,30 @@ namespace KursachTest
             for (int i = 0; i < products.Count; i++)
             {
                 comboBox4.Items.Add(products[i]);
+            }
+            Functions.GetSklad(skladList);
+            for(int i=0; i<skladList.Count; i++)
+            {
+                comboBox5.Items.Add(skladList[i].number.ToString());
+            }
+            Functions.GetProductions(productionList);
+            for (int i=0; i< productionList.Count; i++)
+            {
+                string[] items = {productionList[i].name,
+                                  productionList[i].sklad.ToString(),
+                                  productionList[i].count.ToString()
+                };
+                listView2.Items.Add(new ListViewItem(items));
+            }
+            Functions.GetDishWithComponent(dishList);
+            for (int i = 0; i < dishList.Count; i++)
+            {
+                string[] items = {dishList[i].name,
+                                  dishList[i].price.ToString(),
+                                  dishList[i].weight.ToString(),
+                                  dishList[i].category.ToString()
+                };
+                listView3.Items.Add(new ListViewItem(items));
             }
         }
 
@@ -44,11 +70,14 @@ namespace KursachTest
             comboBox3.SelectedIndex = -1;
             comboBox4.SelectedIndex = -1;
             foreach (ListViewItem item in listView1.Items) listView1.Items.Remove(item);
+            productList.Clear();
         }
         private void CheckNewSotr()
         {
             string stazh = textBox3.Text.Trim();
-            bool isNum = int.TryParse(stazh, out _);
+            bool isNum = false;
+            if (stazh.Length != 0) 
+            isNum = int.TryParse(stazh, out _);
 
             if (textBox1.Text.Length - 1 > 6)
             {
@@ -63,6 +92,7 @@ namespace KursachTest
                                 NewSotr();
                                 ClearStaffBoxes();
                                 Functions.UpdateConnect();
+                                
                             } else
                             {
                                 label11.Visible = true;
@@ -114,7 +144,16 @@ namespace KursachTest
             if (j == 1)
             {
                 panel2.Visible = false;
+                label39.Visible = false;
+                label40.Visible = false;
+                label41.Visible = false;
+                label42.Visible = false;
+                panel6.Visible = false;
+                label51.Visible = false;
+                panel7.Visible = false;
+                label55.Visible = false;
                 aTimer.Stop();
+                j = 0;
             }
             else
                 j++;
@@ -196,11 +235,15 @@ namespace KursachTest
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            string stazh = textBox6.Text.Trim();
-            bool isPrice = int.TryParse(stazh, out _);
+            string price = textBox6.Text.Trim();
+            bool isPrice = false;
+            if (price.Length != 0)
+            isPrice = int.TryParse(price, out _);
 
-            stazh = textBox7.Text.Trim();
-            bool isWeight = int.TryParse(stazh, out _);
+            string weight = textBox7.Text.Trim();
+            bool isWeight = false;
+            if (weight.Length != 0)
+            isWeight = int.TryParse(weight, out _);
 
             if (textBox2.Text.Length > 3)
             {
@@ -218,7 +261,32 @@ namespace KursachTest
                                                   comboBox2.Text,
                                                   productList);
                                 Functions.UpdateConnect();
+                                
+                                DishWithComponent item = new DishWithComponent();
+                                item.name = textBox2.Text;
+                                item.price = Convert.ToInt32(textBox6.Text);
+                                item.weight = Convert.ToInt32(textBox7.Text);
+                                item.category = comboBox2.Text;
+                                item.productList = new List<Product>();
+                                dishList.Add(item);
+                                for (int i = 0; i < productList.Count; i++) {
+                                    Product prod = new Product();
+                                    prod.name = productList[i].name;
+                                    prod.count = productList[i].count;
+                                    dishList[dishList.Count-1].productList.Add(prod);
+                                }
+                                
+                                string[] items = {item.name, item.price.ToString(),
+                                                  item.price.ToString(), item.category
+                                };
+                                listView3.Items.Add(new ListViewItem(items));
                                 ClearDishBoxes();
+
+                                panel6.Visible = true;
+                                panel6.BringToFront();
+                                aTimer.Interval = 1000;
+                                aTimer.Tick += new EventHandler(OnTimeEvent);
+                                aTimer.Start();
                             } else
                             {
                                 label25.Visible = true;
@@ -274,9 +342,7 @@ namespace KursachTest
 
         private void TextBox8_TextChanged(object sender, EventArgs e)
         {
-            label25.Visible = false;
-            comboBox4.BackColor = Color.FromArgb(228, 209, 211);
-            listView1.BackColor = Color.FromArgb(228, 209, 211);
+           
         }
 
         private void Button5_Click(object sender, EventArgs e)
@@ -294,5 +360,376 @@ namespace KursachTest
                 }
             }
         }
+
+        private void Label32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBox11_TextChanged(object sender, EventArgs e)
+        {
+            label34.Visible = false;
+            textBox11.BackColor = Color.FromArgb(228, 209, 211);
+        }
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void TextBox10_TextChanged(object sender, EventArgs e)
+        {
+            label33.Visible = false;
+            textBox10.BackColor = Color.FromArgb(228, 209, 211);
+        }
+
+        private void PictureBox9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Button7_Click_1(object sender, EventArgs e)
+        {
+            bool isNumber = false, isTemp = false;
+            string number = textBox10.Text.Trim();
+            if (textBox10.TextLength != 0)
+            isNumber = int.TryParse(number, out _);
+
+            string temp = textBox11.Text.Trim();
+            if (textBox11.TextLength != 0)
+                isTemp = int.TryParse(number, out _);
+
+            bool isIT = false;
+
+            if (isNumber)
+            {
+                if (isTemp)
+                {
+                    if ((Convert.ToInt32(temp) >= 0 & Convert.ToInt32(temp) <= 5))
+                    {
+                        for (int i = 0; i < skladList.Count; i++)
+                        {
+                            if (skladList[i].number.ToString() == textBox10.Text)
+                            {
+                                label39.Visible = true;
+                                label39.BringToFront();
+                                aTimer.Interval = 1000;
+                                aTimer.Tick += new EventHandler(OnTimeEvent);
+                                aTimer.Start();
+                                isIT = true;
+                            }
+                        }
+                        if (!isIT)
+                        {
+                            Functions.AddSklad(textBox10.Text, textBox11.Text);
+                            label40.Visible = true;
+                            label40.BringToFront();
+                            textBox10.Text = "";
+                            textBox11.Text = "";
+                            aTimer.Interval = 1000;
+                            aTimer.Tick += new EventHandler(OnTimeEvent);
+                            aTimer.Start();
+                            Functions.GetSklad(skladList);
+                            comboBox5.Items.Clear();
+                            for (int p = 0; p < skladList.Count; p++)
+                            {
+                                comboBox5.Items.Add(skladList[p].number.ToString());
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    label34.Visible = true;
+                    textBox11.BackColor = Color.FromArgb(255, 192, 192);
+                }
+            }
+            else
+            {
+                label33.Visible = true;
+                textBox10.BackColor = Color.FromArgb(255, 192, 192);
+            }
+        }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            string count = textBox9.Text;
+            string nameProd = textBox8.Text;
+            
+            bool isNumber = false, isUpdated = false;
+            if (textBox9.TextLength != 0)
+                isNumber = int.TryParse(count, out _);
+            
+            if (textBox8.TextLength != 0)
+            {
+                if (isNumber)
+                {
+                    if (comboBox5.SelectedItem != null)
+                    {
+                        string sklad = comboBox5.SelectedItem.ToString();
+                        List<string> product = new List<string>();
+                        for (int i = 0; i < productionList.Count; i++)
+                        {
+                            if (productionList[i].name == nameProd & productionList[i].sklad.ToString() == sklad)
+                            {
+                                productionList[i].count += Convert.ToInt32(count);
+                                listView2.Items[i].SubItems[2].Text = productionList[i].count.ToString();
+                                product.Add(nameProd);
+                                product.Add(sklad);
+                                product.Add(productionList[i].count.ToString());
+                                Functions.UpdateProducts(product);
+                                isUpdated = true;
+                            }
+                        }
+                        if (!isUpdated)
+                        {
+                            Functions.AddProduct(nameProd, Convert.ToInt32(sklad), Convert.ToInt32(count));
+                            string[] item = { nameProd, sklad, count };
+
+                            listView2.Items.Add(new ListViewItem(item));
+                        }
+                        label41.Visible = true;
+                        label41.BringToFront();
+                        textBox8.Text = "";
+                        textBox9.Text = "";
+                        comboBox5.SelectedIndex = -1;
+                        aTimer.Interval = 1000;
+                        aTimer.Tick += new EventHandler(OnTimeEvent);
+                        aTimer.Start();
+                    } else
+                    {
+                        comboBox5.BackColor = Color.FromArgb(255, 192, 192);
+                    }
+                } else
+                {
+                    textBox9.BackColor = Color.FromArgb(255, 192, 192);
+                }
+            } else
+            {
+                label56.Visible = true;
+                textBox8.BackColor = Color.FromArgb(255, 192, 192);
+            }
+        }
+
+        private void TextBox10_TextChanged_1(object sender, EventArgs e)
+        {
+            label33.Visible = false;
+            textBox10.BackColor = Color.FromArgb(228, 209, 211);
+        }
+
+        private void TextBox11_TextChanged_1(object sender, EventArgs e)
+        {
+            label34.Visible = false;
+            textBox11.BackColor = Color.FromArgb(228, 209, 211);
+        }
+
+        private void Button8_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection collection = listView2.SelectedIndices;
+            if (collection.Count != 0)
+            {
+                int select = listView2.SelectedIndices[0];
+
+                string nameProd = listView2.Items[select].SubItems[0].Text;
+                string sklad = listView2.Items[select].SubItems[1].Text;
+                bool canDeleted = true;
+
+                for (int i = 0; i < dishList.Count; i++)
+                {
+                    for (int j = 0; j < dishList[i].productList.Count; j++)
+                    {
+                        if (nameProd == dishList[i].productList[j].name)
+                        {
+                            canDeleted = false;
+                            panel7.Visible = true;
+                            panel7.BringToFront();
+                            aTimer.Interval = 1000;
+                            aTimer.Tick += new EventHandler(OnTimeEvent);
+                            aTimer.Start();
+                            label53.Text = dishList[i].name;
+                        }
+                    }
+                }
+                if (canDeleted)
+                {
+                    listView2.Items.RemoveAt(collection[0]);
+                    productionList.RemoveAt(select);
+                    Functions.DeleteProduct(nameProd, Convert.ToInt32(sklad));
+
+                    label42.Visible = true;
+                    label42.BringToFront();
+                    aTimer.Interval = 1000;
+                    aTimer.Tick += new EventHandler(OnTimeEvent);
+                    aTimer.Start();
+                }
+            }
+        }
+
+        private void ListView3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button10_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection collection = listView3.SelectedIndices;
+            if (collection.Count != 0)
+            {
+                int select = listView3.SelectedIndices[0];
+                label48.Text = "";
+
+                for (int i = 0; i < dishList.Count; i++)
+                {
+                    if (listView3.Items[select].SubItems[0].Text == dishList[i].name)
+                    {
+                        for (int j = 0; j < dishList[i].productList.Count; j++)
+                        {
+                            label48.Text += dishList[i].productList[j].name + ", ";
+                        }
+                    }
+                }
+                
+            }
+        }
+
+        private void Button9_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection collection = listView3.SelectedIndices;
+            if (collection.Count != 0)
+            {
+                panel5.Visible = true;
+                panel5.BringToFront();
+            }
+        }
+
+        private void Button11_Click(object sender, EventArgs e)
+        {
+            int select = listView3.SelectedIndices[0];
+            Functions.DeleteDishWithComponent(listView3.Items[select].SubItems[0].Text);
+            panel5.SendToBack();listView3.Items.RemoveAt(select);
+            dishList.RemoveAt(select);
+
+            label51.Visible = true;
+            label51.BringToFront();
+            aTimer.Interval = 1000;
+            aTimer.Tick += new EventHandler(OnTimeEvent);
+            aTimer.Start();
+        }
+
+        private void Button12_Click(object sender, EventArgs e)
+        {
+            panel5.SendToBack();
+        }
+
+        private void Button13_Click(object sender, EventArgs e) // Кнопка плюс количество продукта
+        {
+            ListView.SelectedIndexCollection collection = listView2.SelectedIndices;
+            if (collection.Count != 0)
+            {
+                int select = listView2.SelectedIndices[0];
+                bool canEdit = CheckCountProd(true, select);
+
+                if (canEdit)
+                {
+                    string name = listView2.Items[select].SubItems[0].Text;
+                    string sklad = listView2.Items[select].SubItems[1].Text;
+                    string count = listView2.Items[select].SubItems[2].Text;
+
+                    int countProd = Convert.ToInt32(count);
+                    countProd += Convert.ToInt32(textBox12.Text);
+                    listView2.Items[select].SubItems[2].Text = countProd.ToString();
+
+                    productionList[select].count = countProd;
+                    List<string> product = new List<string>();
+                    product.Add(name);
+                    product.Add(sklad);
+                    product.Add(countProd.ToString());
+                    Functions.UpdateProducts(product);
+                }
+            }
+        }
+
+        private void Button14_Click(object sender, EventArgs e) // Кнопка минус количество продукта
+        {
+
+            ListView.SelectedIndexCollection collection = listView2.SelectedIndices;
+            if (collection.Count != 0)
+            {
+                int select = listView2.SelectedIndices[0];
+                bool canEdit = CheckCountProd(false, select);
+
+                if (canEdit)
+                {
+                    string name = listView2.Items[select].SubItems[0].Text;
+                    string sklad = listView2.Items[select].SubItems[1].Text;
+                    string count = listView2.Items[select].SubItems[2].Text;
+
+                    int countProd = Convert.ToInt32(count);
+                    countProd -= Convert.ToInt32(textBox12.Text);
+                    listView2.Items[select].SubItems[2].Text = countProd.ToString();
+
+                    productionList[select].count = countProd;
+                    List<string> product = new List<string>();
+                    product.Add(name);
+                    product.Add(sklad);
+                    product.Add(countProd.ToString());
+                    Functions.UpdateProducts(product);
+                } 
+                if (!canEdit)
+                {
+                    label55.Visible = true;
+                    label55.BringToFront();
+                    aTimer.Interval = 1000;
+                    aTimer.Tick += new EventHandler(OnTimeEvent);
+                    aTimer.Start();
+                }
+            }
+        }
+
+        private bool CheckCountProd(bool znak, int select)
+        {
+            bool yes = false;
+
+            if (textBox12.TextLength != 0)
+                yes = int.TryParse(textBox12.Text, out _);             
+            
+            if (!znak & yes)
+            {
+                int res = Convert.ToInt32(textBox12.Text);
+                if (Convert.ToInt32(listView2.Items[select].SubItems[2].Text) > res)
+                    return true;
+            }
+            if (znak & yes) return true;
+            return false;
+            
+        }
+
+        private void TextBox8_TextChanged_1(object sender, EventArgs e)
+        {
+            label56.Visible = false;
+            textBox8.BackColor = Color.FromArgb(228, 209, 211);
+        }
+
+        private void ComboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            label25.Visible = false;
+            comboBox4.BackColor = Color.FromArgb(228, 209, 211);
+            listView1.BackColor = Color.FromArgb(228, 209, 211);
+        }
+
+        private void TextBox9_TextChanged(object sender, EventArgs e)
+        {
+            textBox9.BackColor = Color.FromArgb(228, 209, 211);
+            comboBox5.BackColor = Color.FromArgb(228, 209, 211);
+        }
     }
 }
+
+// Сделать удаление блюд (готово)
+// Сделать проверку на удаление продукта (готово)
+// Сделать +- количество продуктов (готово)

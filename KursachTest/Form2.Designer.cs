@@ -44,6 +44,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button17 = new System.Windows.Forms.Button();
@@ -88,6 +92,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
+            this.button20 = new System.Windows.Forms.Button();
             this.snackDishSlide1 = new KursachTest.SnackDishSlide();
             this.sideDishSlide1 = new KursachTest.SideDishSlide();
             this.seasonSlide1 = new KursachTest.SeasonSlide();
@@ -97,13 +102,11 @@
             this.drinksDishSlide1 = new KursachTest.DrinksDishSlide();
             this.dessertDishSlide1 = new KursachTest.DessertDishSlide();
             this.orderSlide1 = new KursachTest.OrderSlide();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
+            this.addNewClient1 = new KursachTest.AddNewClient();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
@@ -122,7 +125,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -141,6 +143,7 @@
             // panel2
             // 
             this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.button20);
             this.panel2.Controls.Add(this.button14);
             this.panel2.Controls.Add(this.sidePanel);
             this.panel2.Controls.Add(this.button1);
@@ -403,6 +406,51 @@
             this.panel1.Size = new System.Drawing.Size(400, 698);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(164)))), ((int)(((byte)(202)))));
+            this.panel8.Controls.Add(this.button19);
+            this.panel8.Controls.Add(this.button18);
+            this.panel8.Controls.Add(this.label15);
+            this.panel8.Location = new System.Drawing.Point(85, 550);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(250, 100);
+            this.panel8.TabIndex = 36;
+            this.panel8.Visible = false;
+            // 
+            // button19
+            // 
+            this.button19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button19.Location = new System.Drawing.Point(132, 49);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(100, 40);
+            this.button19.TabIndex = 2;
+            this.button19.Text = "Нет";
+            this.button19.UseVisualStyleBackColor = false;
+            this.button19.Click += new System.EventHandler(this.Button19_Click);
+            // 
+            // button18
+            // 
+            this.button18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.Location = new System.Drawing.Point(15, 49);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(100, 40);
+            this.button18.TabIndex = 1;
+            this.button18.Text = "Да";
+            this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += new System.EventHandler(this.Button18_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(56, 9);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(140, 33);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Вы уверены?";
             // 
             // pictureBox14
             // 
@@ -836,6 +884,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.addNewClient1);
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Controls.Add(this.snackDishSlide1);
             this.panel5.Controls.Add(this.sideDishSlide1);
@@ -869,6 +918,27 @@
             this.label14.Size = new System.Drawing.Size(274, 33);
             this.label14.TabIndex = 0;
             this.label14.Text = "Заказ успешно оформлен!";
+            // 
+            // button20
+            // 
+            this.button20.Cursor = System.Windows.Forms.Cursors.PanNW;
+            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(87)))), ((int)(((byte)(110)))));
+            this.button20.FlatAppearance.BorderSize = 0;
+            this.button20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(130)))), ((int)(((byte)(161)))));
+            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button20.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button20.Image = ((System.Drawing.Image)(resources.GetObject("button20.Image")));
+            this.button20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button20.Location = new System.Drawing.Point(12, 581);
+            this.button20.Name = "button20";
+            this.button20.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button20.Size = new System.Drawing.Size(178, 115);
+            this.button20.TabIndex = 9;
+            this.button20.Text = "Создать карту клиента";
+            this.button20.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.Button20_Click);
             // 
             // snackDishSlide1
             // 
@@ -961,50 +1031,15 @@
             this.orderSlide1.Size = new System.Drawing.Size(398, 448);
             this.orderSlide1.TabIndex = 0;
             // 
-            // panel8
+            // addNewClient1
             // 
-            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(164)))), ((int)(((byte)(202)))));
-            this.panel8.Controls.Add(this.button19);
-            this.panel8.Controls.Add(this.button18);
-            this.panel8.Controls.Add(this.label15);
-            this.panel8.Location = new System.Drawing.Point(85, 550);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(250, 100);
-            this.panel8.TabIndex = 36;
-            this.panel8.Visible = false;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(56, 9);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(140, 33);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Вы уверены?";
-            // 
-            // button18
-            // 
-            this.button18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
-            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button18.Location = new System.Drawing.Point(15, 49);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(100, 40);
-            this.button18.TabIndex = 1;
-            this.button18.Text = "Да";
-            this.button18.UseVisualStyleBackColor = false;
-            this.button18.Click += new System.EventHandler(this.Button18_Click);
-            // 
-            // button19
-            // 
-            this.button19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
-            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button19.Location = new System.Drawing.Point(132, 49);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(100, 40);
-            this.button19.TabIndex = 2;
-            this.button19.Text = "Нет";
-            this.button19.UseVisualStyleBackColor = false;
-            this.button19.Click += new System.EventHandler(this.Button19_Click);
+            this.addNewClient1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
+            this.addNewClient1.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addNewClient1.Location = new System.Drawing.Point(0, 308);
+            this.addNewClient1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.addNewClient1.Name = "addNewClient1";
+            this.addNewClient1.Size = new System.Drawing.Size(400, 270);
+            this.addNewClient1.TabIndex = 9;
             // 
             // Form2
             // 
@@ -1035,6 +1070,8 @@
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -1055,8 +1092,6 @@
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1135,5 +1170,7 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button button20;
+        private AddNewClient addNewClient1;
     }
 }

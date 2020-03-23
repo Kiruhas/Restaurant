@@ -26,6 +26,26 @@ namespace KursachTest
         public string name;
         public double count;
     }
+    public class Production
+    {
+        public string name;
+        public int count;
+        public int sklad;
+    }
+    public class Sklad
+    {
+        public int number;
+        public int temp;
+    }
+    public class DishWithComponent
+    {
+        public string name;
+        public int price;
+        public int weight;
+        public string category;
+        public List<Product> productList;
+    }
+    
 
     class Functions
     {
@@ -39,6 +59,7 @@ namespace KursachTest
         public static SnackDishSlide snack;
         public static SearchDishSlide search;
         public static OrderSlide order;
+        public static AddNewClient client;
 
         static string connString = "Server = localhost; User id = postgres;" +
                 "Database = Cafe; Port = 5432; Password = dg4ao9hv; SSLMode = Prefer";
@@ -540,6 +561,250 @@ namespace KursachTest
                 }
             }
             connect.Close();
+        }
+
+        public static void GetSklad(List<Sklad> skladList)
+        {
+            skladList.Clear();
+
+            connect = new NpgsqlConnection(connString);
+            connect.Open();
+
+            string number = "";
+            string temp = "";
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT skladnumber, temponsklad " +
+                "FROM public.sklad", connect);
+
+            using (command)
+            {
+                NpgsqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    number = reader[0].ToString();
+                    temp = reader[1].ToString();
+                    Sklad item = new Sklad();
+                    item.number = Convert.ToInt32(number);
+                    item.temp = Convert.ToInt32(temp);
+                    skladList.Add(item);
+                }
+            }
+            connect.Close();
+        }
+
+        public static void AddSklad(string number, string temp)
+        {
+            connect = new NpgsqlConnection(connString);
+
+            using (connect)
+            {
+                connect.Open();
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO public.sklad" +
+                    "(skladnumber, temponsklad) VALUES (@number, @temp)", connect);
+                command.Parameters.AddWithValue("@number", Convert.ToInt32(number));
+                command.Parameters.AddWithValue("@temp", Convert.ToInt32(temp));
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public static void GetProductions(List<Production> product)
+        {
+            connect = new NpgsqlConnection(connString);
+            connect.Open();
+
+            string prod = "";
+            string count = "";
+            string sklad = "";
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT productname, skladnumber," +
+                "quantity FROM public.product", connect);
+
+            using (command)
+            {
+                NpgsqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    prod = reader[0].ToString();
+                    sklad = reader[1].ToString();
+                    count = reader[2].ToString();
+                    Production item = new Production();
+                    item.name = prod;
+                    item.count = Convert.ToInt32(count);
+                    item.sklad = Convert.ToInt32(sklad);
+                    product.Add(item);
+                }
+            }
+            connect.Close();
+        }
+
+       public static void UpdateProducts(List<string> prod)
+       {
+            connect = new NpgsqlConnection(connString);
+            int count = Convert.ToInt32(prod[2]);
+            string name = prod[0];
+            int sklad = Convert.ToInt32(prod[1]);
+            using (connect)
+            {
+                connect.Open();
+                NpgsqlCommand command = new NpgsqlCommand("UPDATE public.product" +
+                    " SET quantity = " + count + " WHERE productname = '" + name +
+                    "' AND skladnumber = " + sklad, connect);
+                command.ExecuteNonQuery();
+            }
+       }
+
+        public static void AddProduct(string name, int sklad, int count)
+        {
+            connect = new NpgsqlConnection(connString);
+
+            using (connect)
+            {
+                connect.Open();
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO public.product" +
+                    "(productname, skladnumber, quantity) VALUES (@name, @sklad, " +
+                    "@count)", connect);
+                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@sklad", sklad);
+                command.Parameters.AddWithValue("@count", count);
+                command.ExecuteNonQuery(); 
+            }
+        }
+
+        public static void DeleteProduct(string name, int sklad)
+        {
+            connect = new NpgsqlConnection(connString);
+
+            using (connect)
+            {
+                connect.Open();
+                NpgsqlCommand command = new NpgsqlCommand("DELETE FROM public.product" +
+                    " WHERE productname = '" + name + "' AND skladnumber = " + sklad, connect);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public static void GetDishWithComponent(List<DishWithComponent> list)
+        {
+            connect = new NpgsqlConnection(connString);
+            connect.Open();
+
+            
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT dishname, price, " +
+                "weight, category FROM public.dish", connect);
+
+            using (command)
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        DishWithComponent item = new DishWithComponent();
+                        item.name = reader[0].ToString();
+                        item.price = Convert.ToInt32(reader[1]);
+                        item.weight = Convert.ToInt32(reader[2]);
+                        item.category = reader[3].ToString();
+                        item.productList = new List<Product>();
+                        list.Add(item);
+                    }
+                }
+            }
+            
+
+            for (int i=0; i < list.Count; i++)
+            {
+                NpgsqlCommand command1 = new NpgsqlCommand("SELECT productname, countprod FROM " +
+                    "public.dishcomponent WHERE dishname = '" + list[i].name + "'", connect);
+                using (command1)
+                {
+                    using (NpgsqlDataReader reader = command1.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Product prod = new Product();
+                            prod.name = reader[0].ToString();
+                            prod.count = Convert.ToDouble(reader[1]);
+                            list[i].productList.Add(prod);
+                            
+                        }
+                    }
+                }
+            }
+
+            connect.Close();
+        }
+
+        public static void DeleteDishWithComponent(string name)
+        {
+            connect = new NpgsqlConnection(connString);
+
+            using (connect)
+            {
+                connect.Open();
+                NpgsqlCommand command = new NpgsqlCommand("DELETE FROM public.dishcomponent" +
+                    " WHERE dishname = '" + name + "'", connect);
+                command.ExecuteNonQuery();
+            }
+
+            connect = new NpgsqlConnection(connString);
+
+            using (connect)
+            {
+                connect.Open();
+                NpgsqlCommand command = new NpgsqlCommand("DELETE FROM public.dish" +
+                    " WHERE dishname = '" + name + "'", connect);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public static void AddNewClient(string name, string number, int age, int sale)
+        {
+            connect = new NpgsqlConnection(connString);
+
+            using (connect)
+            {
+                connect.Open();
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO public.client" +
+                    "(telnumber, fioclient, age) VALUES (@tel, @name, " +
+                    "@age)", connect);
+                command.Parameters.AddWithValue("@tel", number);
+                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@age", age);
+                command.ExecuteNonQuery(); 
+            }
+            // ДОБАВИТЬ ВСТАВКУ КАРТЫ
+
+            int numberCard = 0;
+            connect = new NpgsqlConnection(connString);
+            connect.Open();
+            NpgsqlCommand command1 = new NpgsqlCommand("SELECT MAX(cardnumber) " +
+                "FROM public.cardclient", connect);
+            using (command1)
+            {
+                using (NpgsqlDataReader reader = command1.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        numberCard = Convert.ToInt32(reader[0]);
+                    }
+                }
+            }
+            connect.Close();
+
+            numberCard++;
+            connect = new NpgsqlConnection(connString);
+
+            using (connect)
+            {
+                connect.Open();
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO public.cardclient" +
+                    "(cardnumber, telnumber, salepercent) VALUES (@card, @tel, " +
+                    "@sale)", connect);
+                command.Parameters.AddWithValue("@card", numberCard);
+                command.Parameters.AddWithValue("@tel", number);
+                command.Parameters.AddWithValue("@sale", sale);
+                command.ExecuteNonQuery();
+            }
         }
     }
 

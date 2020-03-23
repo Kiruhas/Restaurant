@@ -398,6 +398,12 @@ namespace KursachTest
         {
 
         }
+
+        private void Button20_Click(object sender, EventArgs e)
+        {
+            Functions.client.BringToFront();
+        }
+
         private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
