@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KursachTest
@@ -22,7 +15,7 @@ namespace KursachTest
         {
             string name = textBox1.Text, tel = textBox2.Text;
             bool yesTel = false, yesAge = false, yesSale = false;
-            if (textBox2.TextLength != 0)
+            if (textBox2.TextLength == 10)
                 yesTel = double.TryParse(textBox2.Text, out _);
             if (textBox3.TextLength != 0)
                 yesAge = int.TryParse(textBox3.Text, out _);

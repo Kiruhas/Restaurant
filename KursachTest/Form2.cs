@@ -18,6 +18,7 @@ namespace KursachTest
         List<Dish> dishList = new List<Dish>(); // Список блюд в заказе
         List<Order> orderList = new List<Order>(); // Список заказов
         List<Button> orderButtons = new List<Button>(); // Список кнопок заказов
+        List<Production> productsList = new List<Production>(); // Список продуктов в наличии
 
         public Form2(string fioSotr)
         {
@@ -27,7 +28,8 @@ namespace KursachTest
             seasonSlide1.BringToFront();// показ первой панели при запуске
             updateTime(); // Обновление времени
             Functions.f2 = this; 
-            listView1.ColumnWidthChanging += new ColumnWidthChangingEventHandler(ListView1_ColumnWidthChanging); 
+            listView1.ColumnWidthChanging += new ColumnWidthChangingEventHandler(ListView1_ColumnWidthChanging);
+            Functions.GetProductions(productsList);
         }
 
         /*WORK WITH ORDERS*/
@@ -167,23 +169,23 @@ namespace KursachTest
         }
         private void Button9_Click(object sender, EventArgs e) // кнопка добавить
         {
-            if (nameDish != "")
-            {
-                AddDishToList();
-                ListViewItem item1 = listView1.FindItemWithText(nameDish);
-                if (item1 != null)
-                {
-                    item1.SubItems[1].Text = countDish;
-                }
-                else
-                {
-                    string[] items = { nameDish, countDish, priceDish };
-                    listView1.Items.Add(new ListViewItem(items));
-                }
+            
+                    AddDishToList();
+                    ListViewItem item1 = listView1.FindItemWithText(nameDish);
+                    if (item1 != null)
+                    {
+                        item1.SubItems[1].Text = countDish;
+                    }
+                    else
+                    {
+                        string[] items = { nameDish, countDish, priceDish };
+                        listView1.Items.Add(new ListViewItem(items));
+                    }
 
-                finishPrice += Convert.ToInt32(priceDish);
-                ClearAndUpdatePrice();
-            }
+                    finishPrice += Convert.ToInt32(priceDish);
+                    ClearAndUpdatePrice();
+                
+            
         }
         private void Button10_Click(object sender, EventArgs e) // кнопка удалить
         {
@@ -292,22 +294,33 @@ namespace KursachTest
         }
         private void Button18_Click(object sender, EventArgs e) // подтверждение оформления заказа
         {
-            Functions.CheckOut(sotrName, label13.Text, dishList);
-            Functions.UpdateConnect();
+            bool isRight = CheckCountProducts(dishList, productsList);
 
-            panel7.Visible = true;
-            panel7.BringToFront();
-            aTimer.Interval = 1000;
-            aTimer.Tick += new EventHandler(OnTimeEvent);
-            aTimer.Start();
-            AddOrderToList();
-            ClearAll();
+            if (isRight)
+            {
+                Functions.CheckOut(sotrName, label13.Text, dishList);
+                Functions.UpdateConnect();
+                Functions.RemoveProducts(dishList);
+                Functions.UpdateConnect();
 
-            panel8.Visible = false;
-        }
+                panel7.Visible = true;
+                panel7.BringToFront();
+                aTimer.Interval = 1000;
+                aTimer.Tick += new EventHandler(OnTimeEvent);
+                aTimer.Start();
+                AddOrderToList();
+                ClearAll();
+
+                panel8.Visible = false;
+            }
+        } 
         private void Button19_Click(object sender, EventArgs e) // отклонение заказа
         {
             panel8.Visible = false;
+        }
+        private void Button20_Click(object sender, EventArgs e) // Добавление клиента
+        {
+            Functions.client.BringToFront();
         }
         /*BUTTONS----END*/
 
@@ -319,6 +332,7 @@ namespace KursachTest
             if (j == 1)
             {
                 panel7.Visible = false;
+                panel9.Visible = false;
                 aTimer.Stop();
             }else 
             j++;
@@ -327,6 +341,42 @@ namespace KursachTest
         {
             HidePanel();
         }
+        private bool CheckCountProducts(List<Dish> dishlist, List<Production> prodList)
+        {
+            for (int i = 0; i < dishList.Count; i++)
+            {
+                int countDish = dishlist[i].count;
+                string nameDish = dishlist[i].name;
+                int countDishMax = 0;
+                List<Product> containProduct = new List<Product>();
+                Functions.GetDishComponent(nameDish, containProduct);
+
+                for (int q = 0; q < containProduct.Count; q++)
+                {
+                    for (int j = 0; j < prodList.Count; j++)
+                    {
+                        if (containProduct[q].name == prodList[j].name)
+                        {
+                            if (containProduct[q].count * countDish > prodList[j].count)
+                            {
+                                if (prodList[j].count == 0) countDishMax = 0;
+                                else countDishMax = prodList[j].count / Convert.ToInt32(containProduct[q].count);
+                                label16.Text = "Неудачно! Количество блюд " + nameDish + " максимум " + countDishMax;
+                                panel9.Visible = true;
+                                panel8.Visible = false;
+                                panel9.BringToFront();
+                                aTimer.Interval = 1000;
+                                aTimer.Tick += new EventHandler(OnTimeEvent);
+                                aTimer.Start();
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+            }
+            return true;
+        } // проверка на наличие продуктов на складе
         /*CHECKOUT IS RIGHT---END*/
 
         /*WORK WITH LISTS*/
@@ -398,12 +448,6 @@ namespace KursachTest
         {
 
         }
-
-        private void Button20_Click(object sender, EventArgs e)
-        {
-            Functions.client.BringToFront();
-        }
-
         private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 

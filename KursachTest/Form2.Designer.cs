@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button20 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.sidePanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -90,9 +91,9 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.addNewClient1 = new KursachTest.AddNewClient();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
-            this.button20 = new System.Windows.Forms.Button();
             this.snackDishSlide1 = new KursachTest.SnackDishSlide();
             this.sideDishSlide1 = new KursachTest.SideDishSlide();
             this.seasonSlide1 = new KursachTest.SeasonSlide();
@@ -102,7 +103,8 @@
             this.drinksDishSlide1 = new KursachTest.DrinksDishSlide();
             this.dessertDishSlide1 = new KursachTest.DessertDishSlide();
             this.orderSlide1 = new KursachTest.OrderSlide();
-            this.addNewClient1 = new KursachTest.AddNewClient();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -125,6 +127,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -132,7 +135,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(34, 711);
+            this.button1.Location = new System.Drawing.Point(34, 701);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(128, 41);
             this.button1.TabIndex = 0;
@@ -160,9 +163,30 @@
             this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 768);
+            this.panel2.Size = new System.Drawing.Size(200, 749);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // button20
+            // 
+            this.button20.Cursor = System.Windows.Forms.Cursors.PanNW;
+            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(87)))), ((int)(((byte)(110)))));
+            this.button20.FlatAppearance.BorderSize = 0;
+            this.button20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(130)))), ((int)(((byte)(161)))));
+            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button20.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button20.Image = ((System.Drawing.Image)(resources.GetObject("button20.Image")));
+            this.button20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button20.Location = new System.Drawing.Point(12, 581);
+            this.button20.Name = "button20";
+            this.button20.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button20.Size = new System.Drawing.Size(178, 115);
+            this.button20.TabIndex = 9;
+            this.button20.Text = "Создать карту клиента";
+            this.button20.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.Button20_Click);
             // 
             // button14
             // 
@@ -375,6 +399,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel9);
             this.panel1.Controls.Add(this.panel8);
             this.panel1.Controls.Add(this.pictureBox14);
             this.panel1.Controls.Add(this.panel6);
@@ -403,7 +428,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(966, 70);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(400, 698);
+            this.panel1.Size = new System.Drawing.Size(400, 679);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
@@ -781,7 +806,7 @@
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.label3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(200, 648);
+            this.panel4.Location = new System.Drawing.Point(200, 629);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(766, 120);
             this.panel4.TabIndex = 6;
@@ -900,6 +925,16 @@
             this.panel5.Size = new System.Drawing.Size(766, 578);
             this.panel5.TabIndex = 12;
             // 
+            // addNewClient1
+            // 
+            this.addNewClient1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
+            this.addNewClient1.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addNewClient1.Location = new System.Drawing.Point(0, 308);
+            this.addNewClient1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.addNewClient1.Name = "addNewClient1";
+            this.addNewClient1.Size = new System.Drawing.Size(400, 270);
+            this.addNewClient1.TabIndex = 9;
+            // 
             // panel7
             // 
             this.panel7.Controls.Add(this.label14);
@@ -918,27 +953,6 @@
             this.label14.Size = new System.Drawing.Size(274, 33);
             this.label14.TabIndex = 0;
             this.label14.Text = "Заказ успешно оформлен!";
-            // 
-            // button20
-            // 
-            this.button20.Cursor = System.Windows.Forms.Cursors.PanNW;
-            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(87)))), ((int)(((byte)(110)))));
-            this.button20.FlatAppearance.BorderSize = 0;
-            this.button20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(130)))), ((int)(((byte)(161)))));
-            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button20.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button20.Image = ((System.Drawing.Image)(resources.GetObject("button20.Image")));
-            this.button20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button20.Location = new System.Drawing.Point(12, 581);
-            this.button20.Name = "button20";
-            this.button20.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.button20.Size = new System.Drawing.Size(178, 115);
-            this.button20.TabIndex = 9;
-            this.button20.Text = "Создать карту клиента";
-            this.button20.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.Button20_Click);
             // 
             // snackDishSlide1
             // 
@@ -1031,15 +1045,24 @@
             this.orderSlide1.Size = new System.Drawing.Size(398, 448);
             this.orderSlide1.TabIndex = 0;
             // 
-            // addNewClient1
+            // panel9
             // 
-            this.addNewClient1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
-            this.addNewClient1.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addNewClient1.Location = new System.Drawing.Point(0, 308);
-            this.addNewClient1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.addNewClient1.Name = "addNewClient1";
-            this.addNewClient1.Size = new System.Drawing.Size(400, 270);
-            this.addNewClient1.TabIndex = 9;
+            this.panel9.Controls.Add(this.label16);
+            this.panel9.Location = new System.Drawing.Point(55, 166);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(300, 145);
+            this.panel9.TabIndex = 37;
+            this.panel9.Visible = false;
+            // 
+            // label16
+            // 
+            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label16.Location = new System.Drawing.Point(0, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(300, 145);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Неудачно! Количество блюд .. максимум ..";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form2
             // 
@@ -1048,7 +1071,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
-            this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.ClientSize = new System.Drawing.Size(1366, 749);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
@@ -1092,6 +1115,7 @@
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel9.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1172,5 +1196,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button button20;
         private AddNewClient addNewClient1;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label16;
     }
 }
