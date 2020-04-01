@@ -107,7 +107,7 @@ namespace KursachTest
                                 }
 
                                 string[] items = {item.name, item.price.ToString(),
-                                                  item.price.ToString(), item.category
+                                                  item.weight.ToString(), item.category
                                 };
                                 listView3.Items.Add(new ListViewItem(items));
                                 ClearDishBoxes();

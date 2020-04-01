@@ -84,6 +84,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label41 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
@@ -143,7 +144,6 @@
             this.button14 = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
-            this.label56 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -477,11 +477,14 @@
             // 
             this.comboBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(209)))), ((int)(((byte)(211)))));
             this.comboBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBox4.DropDownHeight = 500;
             this.comboBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.IntegralHeight = false;
             this.comboBox4.Location = new System.Drawing.Point(10, 360);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(254, 41);
+            this.comboBox4.Sorted = true;
             this.comboBox4.TabIndex = 31;
             this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.ComboBox4_SelectedIndexChanged);
             // 
@@ -816,6 +819,18 @@
             this.label41.Text = "Продукт успешно добавлен!";
             this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label41.Visible = false;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label56.ForeColor = System.Drawing.Color.Red;
+            this.label56.Location = new System.Drawing.Point(147, 86);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(190, 23);
+            this.label56.TabIndex = 72;
+            this.label56.Text = "Не может быть пустым!";
+            this.label56.Visible = false;
             // 
             // label40
             // 
@@ -1415,18 +1430,6 @@
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(135, 34);
             this.textBox12.TabIndex = 87;
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label56.ForeColor = System.Drawing.Color.Red;
-            this.label56.Location = new System.Drawing.Point(147, 86);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(190, 23);
-            this.label56.TabIndex = 72;
-            this.label56.Text = "Не может быть пустым!";
-            this.label56.Visible = false;
             // 
             // Form3
             // 

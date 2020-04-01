@@ -187,6 +187,7 @@ namespace KursachTest
         }
         public static void GetDishComponent(string dishName, List<Product> prod) // Запрос состава блюда
         {
+            connect = new NpgsqlConnection(connString);
             connect.Open();
             string nameProd = "";
             int countProd = 0;
