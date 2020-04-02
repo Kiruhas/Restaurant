@@ -223,7 +223,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(300, 768);
+            this.panel1.Size = new System.Drawing.Size(300, 749);
             this.panel1.TabIndex = 14;
             // 
             // panel2
@@ -451,7 +451,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(300, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(400, 768);
+            this.panel3.Size = new System.Drawing.Size(400, 749);
             this.panel3.TabIndex = 18;
             // 
             // panel6
@@ -667,7 +667,7 @@
             this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "Основые блюда",
+            "Основные блюда",
             "Гарниры",
             "Салаты",
             "Закуски",
@@ -1436,7 +1436,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 33F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(112)))), ((int)(((byte)(138)))));
-            this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.ClientSize = new System.Drawing.Size(1366, 749);
             this.Controls.Add(this.label55);
             this.Controls.Add(this.textBox12);
             this.Controls.Add(this.label54);

@@ -336,31 +336,31 @@ namespace KursachTest
                         {
                             case "main":
                                 main.Controls.Add(button);
-                                if (max_size > 21) main.AutoScroll = true;
+                                if (max_size > 15) main.AutoScroll = true;
                                 break;
                             case "dessert":
                                 dessert.Controls.Add(button);
-                                if (max_size > 21) dessert.AutoScroll = true;
+                                if (max_size > 15) dessert.AutoScroll = true;
                                 break;
                             case "drinks":
                                 drinks.Controls.Add(button);
-                                if (max_size > 21) drinks.AutoScroll = true;
+                                if (max_size > 15) drinks.AutoScroll = true;
                                 break;
                             case "salad":
                                 salad.Controls.Add(button);
-                                if (max_size > 21) salad.AutoScroll = true;
+                                if (max_size > 15) salad.AutoScroll = true;
                                 break;
                             case "season":
                                 season.Controls.Add(button);
-                                if (max_size > 21) season.AutoScroll = true;
+                                if (max_size > 15) season.AutoScroll = true;
                                 break;
                             case "side":
                                 side.Controls.Add(button);
-                                if (max_size > 21) side.AutoScroll = true;
+                                if (max_size > 15) side.AutoScroll = true;
                                 break;
                             case "snack":
                                 snack.Controls.Add(button);
-                                if (max_size > 21) snack.AutoScroll = true;
+                                if (max_size > 15) snack.AutoScroll = true;
                                 break;
                         }
                         count++;
