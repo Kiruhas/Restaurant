@@ -45,6 +45,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.button19 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
@@ -103,11 +105,12 @@
             this.drinksDishSlide1 = new KursachTest.DrinksDishSlide();
             this.dessertDishSlide1 = new KursachTest.DessertDishSlide();
             this.orderSlide1 = new KursachTest.OrderSlide();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.panel6.SuspendLayout();
@@ -127,7 +130,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -399,6 +402,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel10);
             this.panel1.Controls.Add(this.panel9);
             this.panel1.Controls.Add(this.panel8);
             this.panel1.Controls.Add(this.pictureBox14);
@@ -431,6 +435,25 @@
             this.panel1.Size = new System.Drawing.Size(400, 679);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.label16);
+            this.panel9.Location = new System.Drawing.Point(55, 166);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(300, 145);
+            this.panel9.TabIndex = 37;
+            this.panel9.Visible = false;
+            // 
+            // label16
+            // 
+            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label16.Location = new System.Drawing.Point(0, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(300, 145);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Неудачно! Количество блюд .. максимум ..";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel8
             // 
@@ -1006,6 +1029,7 @@
             // 
             // mainDishSlide1
             // 
+            this.mainDishSlide1.AutoScroll = true;
             this.mainDishSlide1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(164)))), ((int)(((byte)(202)))));
             this.mainDishSlide1.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mainDishSlide1.Location = new System.Drawing.Point(0, 0);
@@ -1045,24 +1069,24 @@
             this.orderSlide1.Size = new System.Drawing.Size(398, 448);
             this.orderSlide1.TabIndex = 0;
             // 
-            // panel9
+            // panel10
             // 
-            this.panel9.Controls.Add(this.label16);
-            this.panel9.Location = new System.Drawing.Point(55, 166);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(300, 145);
-            this.panel9.TabIndex = 37;
-            this.panel9.Visible = false;
+            this.panel10.Controls.Add(this.label17);
+            this.panel10.Location = new System.Drawing.Point(55, 317);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(300, 145);
+            this.panel10.TabIndex = 38;
+            this.panel10.Visible = false;
             // 
-            // label16
+            // label17
             // 
-            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(0, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(300, 145);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "Неудачно! Количество блюд .. максимум ..";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label17.Location = new System.Drawing.Point(0, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(300, 145);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Выбранный стол уже занят!";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form2
             // 
@@ -1093,6 +1117,7 @@
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel9.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
@@ -1115,7 +1140,7 @@
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            this.panel9.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1198,5 +1223,7 @@
         private AddNewClient addNewClient1;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label17;
     }
 }

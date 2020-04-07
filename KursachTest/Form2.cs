@@ -295,8 +295,23 @@ namespace KursachTest
         private void Button18_Click(object sender, EventArgs e) // подтверждение оформления заказа
         {
             bool isRight = CheckCountProducts(dishList, productsList);
+            bool isTableFree = true;
 
-            if (isRight)
+            for (int i=0; i < orderList.Count; i++)
+            {
+                if (orderList[i].numberTable == listBox1.SelectedIndex + 1)
+                {
+                    isTableFree = false;
+                    panel10.Visible = true;
+                    panel8.Visible = false;
+                    panel10.BringToFront();
+                    aTimer.Interval = 1000;
+                    aTimer.Tick += new EventHandler(OnTimeEvent);
+                    aTimer.Start();
+                }
+            }
+
+            if (isRight & isTableFree)
             {
                 Functions.CheckOut(sotrName, label13.Text, dishList);
                 Functions.UpdateConnect();
@@ -333,6 +348,7 @@ namespace KursachTest
             {
                 panel7.Visible = false;
                 panel9.Visible = false;
+                panel10.Visible = false;
                 aTimer.Stop();
             }else 
             j++;
@@ -442,7 +458,7 @@ namespace KursachTest
         /*EMPTY FUNCTIONS*/
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            
         }
         private void label2_Click(object sender, EventArgs e)
         {
