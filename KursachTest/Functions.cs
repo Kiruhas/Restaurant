@@ -100,7 +100,7 @@ namespace KursachTest
                 string dish = "", newDish = search[0].ToString().ToUpper();
                 bool find = false;
 
-                for (int i = 1; i < search.Length - 1; i++)
+                for (int i = 1; i < search.Length; i++)
                 {
                     newDish += search[i].ToString().ToLower();
                 }
